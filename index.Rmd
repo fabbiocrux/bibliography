@@ -1,0 +1,34 @@
+---
+title: "Bibliography"
+description: |
+  In this table, you will fin the biliography that I use in my research
+author:
+  - name: Fabio Cruz
+    url: https://example.com/norajones
+    affiliation: ERPI
+    affiliation_url: https://erpi.univ-lorraine.fr/
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+#install.packages("bib2df")
+library(bib2df)
+library(tidyverse)
+library(DT)
+```
+
+## Bibliography
+
+```{r, layout="l-body-outset"}
+Biblio <- bib2df("library.bib")
+#names(Biblio)
+Biblio <- Biblio %>% select(BIBTEXKEY, TITLE, YEAR,DOI) %>%  arrange(desc(YEAR), BIBTEXKEY)
+
+
+datatable(Biblio, class = 'cell-border stripe')
+```
+
+
